@@ -1,0 +1,9 @@
+name: BedAdditions
+version: ${project.version}
+main: me.bedpotato.bedadditions.BedAdditions
+api-version: 1.17
+authors: [ BedPotato ]
+description: Features provided to Mytheus by BedPotato
+commands:
+  ba:
+    description: Base Command
