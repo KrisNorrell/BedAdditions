@@ -30,8 +30,6 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-//        if (sender instanceof Player) {
-//            Player player = (Player) sender;
             if (cmd.getName().equalsIgnoreCase(main)) {
                 if (args.length == 0) {
                     if (cmdList(sender).size() > 0) {
@@ -62,29 +60,6 @@ public class CommandManager implements CommandExecutor, TabCompleter {
                     e.printStackTrace();
                 }
             }
-//        } else {
-//            if (cmd.getName().equalsIgnoreCase(main)) {
-//                if (args.length == 0) {
-//                    sender.sendMessage(ChatColor.GREEN + "Commands:");
-//                    for (SubCommand sc : commands) {
-//                        sender.sendMessage("/" + main + " " + (sc.usage() == null ? sc.name() : sc.usage()));
-//                    }
-//                    return true;
-//                }
-//                SubCommand target = this.get(sender, args[0]);
-//                if (target == null) return true;
-//                ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(args));
-//                arrayList.remove(0);
-//                String[] arguments = arrayList.toArray(new String[0]);
-//
-//                try {
-//                    target.onCommand(sender, arguments);
-//                } catch (Exception e) {
-//                    sender.sendMessage(ChatColor.RED + "An error has occurred:");
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
         return true;
     }
 
@@ -124,9 +99,11 @@ public class CommandManager implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) {
-            Player player = (Player) sender;
-            if (args.length == 1) {
-                return StringUtil.copyPartialMatches(args[0], cmdList(player), new ArrayList<>());
+            List<String> all = cmdList(sender);
+            if (args.length >= 1 && all.size() > args.length)
+            {
+                int index = args.length-1;
+                return all.stream().filter(s -> args[index].isEmpty() || s.startsWith(args[index].toLowerCase())).sorted().toList();
             }
         }
         return null;

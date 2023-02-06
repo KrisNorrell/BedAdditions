@@ -25,7 +25,7 @@ public class FileUtil {
             JarEntry entry;
             while((entry = stream.getNextJarEntry()) != null) {
                 final String name = entry.getName();
-                if (name.isEmpty() || !name.endsWith(".class")) {
+                if (!name.endsWith(".class")) {
                     continue;
                 }
                 matches.add(name.substring(0, name.lastIndexOf('.')).replace('/', '.'));
@@ -47,6 +47,4 @@ public class FileUtil {
         return classes.get(0);
 
     }
-
-
 }

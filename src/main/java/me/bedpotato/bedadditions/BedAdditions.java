@@ -4,7 +4,8 @@ import me.bedpotato.bedadditions.events.InventoryClickEvent;
 import me.bedpotato.bedadditions.manager.CommandManager;
 import me.bedpotato.bedadditions.manager.addons.Addon;
 import me.bedpotato.bedadditions.manager.addons.AddonLoader;
-import me.bedpotato.bedadditions.utilities.InventoryUtil.Menu;
+import me.bedpotato.bedadditions.utilities.ConfigHandler;
+import me.bedpotato.bedadditions.utilities.SQLUtil.MySQL;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -15,6 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public final class BedAdditions extends JavaPlugin {
     private static BedAdditions plugin;
@@ -25,6 +27,11 @@ public final class BedAdditions extends JavaPlugin {
     public static BedAdditions getPlugin() {
         return plugin;
     }
+    private static MySQL sql;
+    public static MySQL getSql() {
+        return sql;
+    }
+
 
     @Override
     public void onEnable() {
@@ -42,6 +49,21 @@ public final class BedAdditions extends JavaPlugin {
         shutdown();
         getLogger().info(ChatColor.GREEN + "BedAdditions fully unloaded.");
     }
+    private void connectToSQL() {
+        sql = new MySQL(
+                ConfigHandler.getHost(),
+                ConfigHandler.getPort(),
+                ConfigHandler.getDatabase(),
+                ConfigHandler.getUsername(),
+                ConfigHandler.getPassword()
+        );
+        try {
+            sql.connect();
+        }
+        catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void startup() {
         configFile = new File(getDataFolder(), "config.yml");
@@ -55,6 +77,7 @@ public final class BedAdditions extends JavaPlugin {
         }
         HandlerList.unregisterAll(this);
         manager = new CommandManager();
+        connectToSQL();
         manager.setup();
         new InventoryClickEvent(this);
         new AddonLoader(this);
