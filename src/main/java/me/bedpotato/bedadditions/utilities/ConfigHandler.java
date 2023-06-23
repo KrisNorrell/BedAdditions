@@ -3,10 +3,7 @@ package me.bedpotato.bedadditions.utilities;
 import me.bedpotato.bedadditions.BedAdditions;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 public class ConfigHandler {
     public static FileConfiguration getConfig() {
