@@ -18,9 +18,9 @@ public abstract class Addon {
     private String addonDescription;
     private File configFile;
     private File thisAddonFile;
-    private boolean isEnabled = false;
+    private final boolean isEnabled = false;
     private YamlConfiguration config;
-    private ClassLoader classLoader;
+    private final ClassLoader classLoader;
 
     public Addon() {
         this.classLoader = this.getClass().getClassLoader();
@@ -34,10 +34,15 @@ public abstract class Addon {
         this.config = YamlConfiguration.loadConfiguration(configFile);
     }
 
-    public void run() {};
-    public void onShutdown() {};
+    public void run() {
+    }
+
+    public void onShutdown() {
+    }
+
     /**
      * Gets the JavaPlugin of the Core class
+     *
      * @return JavaPlugin
      */
     public BedAdditions getPlugin() {
@@ -103,11 +108,12 @@ public abstract class Addon {
     public InputStream getResource(String fileName) {
         if (fileName == null) throw new IllegalArgumentException("File name cannot be null");
         try {
-            ZipFile zipFile = new ZipFile(this.thisAddonFile.getAbsolutePath());
-            ZipEntry zipEntry = zipFile.getEntry(fileName);
-            if (zipEntry == null) throw new RuntimeException("Embedded resource for Addon: " + this.addonName +
-                    " Does not exist (" + fileName + ")");
-            return zipFile.getInputStream(zipEntry);
+            try (ZipFile zipFile = new ZipFile(this.thisAddonFile.getAbsolutePath())) {
+                ZipEntry zipEntry = zipFile.getEntry(fileName);
+                if (zipEntry == null) throw new RuntimeException("Embedded resource for Addon: " + this.addonName +
+                        " Does not exist (" + fileName + ")");
+                return zipFile.getInputStream(zipEntry);
+            }
         } catch (IOException ex) {
             return null;
         }

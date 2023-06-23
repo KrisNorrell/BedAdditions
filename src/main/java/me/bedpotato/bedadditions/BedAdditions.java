@@ -1,6 +1,6 @@
 package me.bedpotato.bedadditions;
 
-import me.bedpotato.bedadditions.events.InventoryClickEvent;
+import me.bedpotato.bedadditions.events.MenuListener;
 import me.bedpotato.bedadditions.manager.CommandManager;
 import me.bedpotato.bedadditions.manager.addons.Addon;
 import me.bedpotato.bedadditions.manager.addons.AddonLoader;
@@ -59,8 +59,7 @@ public final class BedAdditions extends JavaPlugin {
         );
         try {
             sql.connect();
-        }
-        catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -79,7 +78,7 @@ public final class BedAdditions extends JavaPlugin {
         manager = new CommandManager();
         connectToSQL();
         manager.setup();
-        new InventoryClickEvent(this);
+        new MenuListener(this);
         new AddonLoader(this);
     }
     public void shutdown() {

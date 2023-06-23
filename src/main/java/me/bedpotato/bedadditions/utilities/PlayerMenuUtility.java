@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class PlayerMenuUtility {
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
-    private Player owner;
+    private final Player owner;
 
     public PlayerMenuUtility(Player p) {
         this.owner = p;
