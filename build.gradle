@@ -3,7 +3,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 apply plugin: 'maven-publish'
-group = 'me.bedpotato'
+group = 'com.github.KrisNorrell'
 version = '3.0'
 description = 'BedAdditions'
 
