@@ -3,7 +3,6 @@ package me.bedpotato.bedadditions.utilities.SQLUtil;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import me.bedpotato.bedadditions.BedAdditions;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -13,10 +12,11 @@ public class MySQL {
     private final HikariConfig hikariConfig = new HikariConfig();
     public int port;
     public Connection connection;
-    public String host, database, username, password;
+    public String type, host, database, username, password;
     protected HikariDataSource dataSource;
 
-    public MySQL(String host, int port, String database, String username, String password) {
+    public MySQL(String type, String host, int port, String database, String username, String password) {
+        this.type = type;
         this.host = host;
         this.port = port;
         this.database = database;
@@ -26,15 +26,11 @@ public class MySQL {
 
     public void connect() throws SQLException {
         if (!isConnected()) {
-            try {
-                Class.forName("org.mariadb.jdbc.Driver");
-            } catch (ClassNotFoundException var12) {
-                BedAdditions.getPlugin().getLogger().severe("Driver org.mariadb.jdbc.Driver not found");
-
+            switch (type) {
+                case "mysql" -> hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
+                case "mariadb" -> hikariConfig.setDriverClassName("org.mariadb.jdbc.Driver");
             }
-
-            hikariConfig.setDriverClassName("org.mariadb.jdbc.Driver");
-            String url = "jdbc:mariadb://" + host + ":" + port + "/" + database;
+            String url = "jdbc:" + type + "://" + host + ":" + port + "/" + database;
             hikariConfig.setJdbcUrl(url);
             hikariConfig.setUsername(username);
             hikariConfig.setPassword(password);

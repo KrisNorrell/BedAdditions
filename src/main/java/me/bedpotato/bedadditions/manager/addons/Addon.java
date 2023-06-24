@@ -154,16 +154,14 @@ public abstract class Addon {
         }
     }
     public void copyConfig() {
-        FileConfiguration toCopy = new YamlConfiguration();
         try {
-            toCopy.load(new InputStreamReader(getResource("config.yml")));
-            for (String config : toCopy.getKeys(false)) {
+            for (String config : plugin.config.getKeys(false)) {
                 if (!plugin.config.contains(config)) {
-                    plugin.config.set(config, toCopy.get(config));
+                    plugin.config.set(config, plugin.config.get(config));
                 }
                 plugin.config.save(plugin.configFile);
             }
-        } catch (IOException | InvalidConfigurationException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

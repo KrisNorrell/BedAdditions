@@ -3,43 +3,34 @@ package me.bedpotato.bedadditions.utilities;
 import me.bedpotato.bedadditions.BedAdditions;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import java.util.List;
-
 public class ConfigHandler {
     public static FileConfiguration getConfig() {
         return BedAdditions.getPlugin().config;
     }
 
-    public static Object get(String path) {
-        return getConfig().get(path);
-    }
-
-    public static List<String> getMessage(String path) {
-        return getConfig().getStringList("messages." + path);
-    }
-
-    public static boolean isSQL() {
-        return getConfig().getBoolean("mysql.use-mysql");
+    public static String getType() {
+        return getConfig().getString("storage.type");
     }
 
     public static String getHost() {
-        return getConfig().getString("mysql.host");
+        return getConfig().getString("storage.host");
     }
 
     public static int getPort() {
-        return getConfig().getInt("mysql.port");
+        return getConfig().getInt("storage.port");
     }
 
     public static String getDatabase() {
-        return getConfig().getString("mysql.database");
+        return getConfig().getString("storage.database");
     }
 
     public static String getUsername() {
-        return getConfig().getString("mysql.username");
+        return getConfig().getString("storage.username");
     }
 
     public static String getPassword() {
-        return getConfig().getString("mysql.password");
+        return getConfig().getString("storage.password");
     }
 
 }
+
