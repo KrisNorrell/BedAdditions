@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CommandManager implements CommandExecutor, TabCompleter {
 
@@ -103,7 +102,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
             if (args.length >= 1 && all.size() > args.length)
             {
                 int index = args.length-1;
-                return all.stream().filter(s -> args[index].isEmpty() || s.startsWith(args[index].toLowerCase())).sorted().collect(Collectors.toList());
+                return all.stream().filter(s -> args[index].isEmpty() || s.startsWith(args[index].toLowerCase())).sorted().toList();
             }
         }
         return null;

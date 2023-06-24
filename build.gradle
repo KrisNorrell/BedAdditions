@@ -8,6 +8,12 @@ group = 'com.github.KrisNorrell'
 version = '3.0'
 description = 'BedAdditions'
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
 repositories {
     mavenCentral()
     maven {
