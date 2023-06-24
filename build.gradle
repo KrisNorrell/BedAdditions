@@ -6,6 +6,8 @@ apply plugin: 'maven-publish'
 group = 'com.github.KrisNorrell'
 version = '3.0'
 description = 'BedAdditions'
+sourceCompatibility = 1.17 // java 8
+targetCompatibility = 1.17
 
 publishing {
     publications {
