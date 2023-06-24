@@ -32,17 +32,19 @@ repositories {
 dependencies {
     implementation 'com.zaxxer:HikariCP:4.0.3'
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.1.4'
+    implementation 'com.mysql:mysql-connector-j:8.0.33'
     compileOnly 'org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT'
-    // https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin
 }
 shadowJar {
     archiveFileName = project.description + ".jar"
     dependencies {
         include(dependency('com.zaxxer:HikariCP'))
         include(dependency('org.mariadb.jdbc:mariadb-java-client'))
+        include(dependency('com.mysql:mysql-connector-j'))
     }
     relocate('com.zaxxer', 'me.bedpotato.libs.zaxxer')
     relocate('org.mariadb.jdbc', 'me.bedpotato.libs.mariadb')
+    relocate('com.mysql', 'me.bedpotato.libs.mysql')
 }
 publishing {
     publications {

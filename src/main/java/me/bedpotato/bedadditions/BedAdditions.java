@@ -51,8 +51,10 @@ public final class BedAdditions extends JavaPlugin {
         shutdown();
         getLogger().info(ChatColor.GREEN + "BedAdditions fully unloaded.");
     }
+
     private void connectToSQL() {
         sql = new MySQL(
+                ConfigHandler.getType(),
                 ConfigHandler.getHost(),
                 ConfigHandler.getPort(),
                 ConfigHandler.getDatabase(),
@@ -83,10 +85,16 @@ public final class BedAdditions extends JavaPlugin {
         new MenuListener(this);
         new AddonLoader(this);
     }
+
     public void shutdown() {
         AddonLoader.getAddons().forEach(Addon::onShutdown);
         AddonLoader.getAddons().clear();
         HandlerList.unregisterAll(this);
+        try {
+            sql.disconnect();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
