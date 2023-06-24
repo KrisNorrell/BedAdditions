@@ -38,5 +38,13 @@ shadowJar {
     relocate('com.zaxxer', 'me.bedpotato.libs.zaxxer')
     relocate('org.mariadb.jdbc', 'me.bedpotato.libs.mariadb')
 }
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'BedAdditions'
 
+            from components.java
+        }
+    }
+}
 
