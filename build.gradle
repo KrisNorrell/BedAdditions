@@ -7,6 +7,18 @@ group = 'com.github.KrisNorrell'
 version = '3.0'
 description = 'BedAdditions'
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'com.bedpotato'
+            artifactId = 'BedAdditions'
+            version = '3.0'
+
+            from components.java
+        }
+    }
+}
+
 repositories {
     mavenCentral()
     maven {
