@@ -2,19 +2,13 @@ plugins {
     id 'java-library'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
-
-plugins {
-    id 'pl.allegro.tech.build.axion-release' version '1.15.1'
-}
-
-project.version = scmVersion.version
-
+apply plugin: 'maven-publish'
 group = 'me.bedpotato'
 version = '3.0'
 description = 'BedAdditions'
 
 repositories {
-    mavenLocal()
+    mavenCentral()
     maven {
         url = uri('https://oss.sonatype.org/content/groups/public/')
     }
