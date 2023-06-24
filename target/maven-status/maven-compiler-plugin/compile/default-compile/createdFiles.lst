@@ -1,0 +1,14 @@
+me\bedpotato\bedadditions\BedAdditions$1.class
+me\bedpotato\bedadditions\commands\reloadCommand.class
+me\bedpotato\bedadditions\events\InventoryClickEvent.class
+me\bedpotato\bedadditions\manager\SubCommand.class
+me\bedpotato\bedadditions\utilities\FileUtil.class
+me\bedpotato\bedadditions\utilities\InventoryUtil\PaginatedMenu.class
+me\bedpotato\bedadditions\manager\addons\AddonLoader.class
+me\bedpotato\bedadditions\utilities\ConfigHandler.class
+me\bedpotato\bedadditions\BedAdditions.class
+me\bedpotato\bedadditions\manager\addons\Addon.class
+me\bedpotato\bedadditions\manager\CommandManager.class
+me\bedpotato\bedadditions\utilities\InventoryUtil\Menu.class
+me\bedpotato\bedadditions\utilities\PlayerMenuUtility.class
+me\bedpotato\bedadditions\utilities\SQLUtil\MySQL.class
