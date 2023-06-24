@@ -20,15 +20,17 @@ import java.sql.SQLException;
 
 public final class BedAdditions extends JavaPlugin {
     private static BedAdditions plugin;
-    public CommandManager manager;
     public File configFile;
     public FileConfiguration config = new YamlConfiguration();
 
     public static BedAdditions getPlugin() {
         return plugin;
     }
+
     private static MySQL sql;
-    public static MySQL getSql() {
+    public CommandManager manager;
+
+    public MySQL getSql() {
         return sql;
     }
 
@@ -85,6 +87,6 @@ public final class BedAdditions extends JavaPlugin {
         AddonLoader.getAddons().forEach(Addon::onShutdown);
         AddonLoader.getAddons().clear();
         HandlerList.unregisterAll(this);
-        plugin.manager.commands.clear();
     }
+
 }
