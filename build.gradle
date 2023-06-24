@@ -2,24 +2,11 @@ plugins {
     id 'java-library'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
+apply plugin: 'groovy'
 apply plugin: 'maven-publish'
 group = 'com.github.KrisNorrell'
 version = '3.0'
 description = 'BedAdditions'
-sourceCompatibility = 1.17 // java 8
-targetCompatibility = 1.17
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId = 'com.bedpotato'
-            artifactId = 'BedAdditions'
-            version = '3.0'
-
-            from components.java
-        }
-    }
-}
 
 repositories {
     mavenCentral()
