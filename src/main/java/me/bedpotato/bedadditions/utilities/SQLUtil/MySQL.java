@@ -40,6 +40,7 @@ public class MySQL {
             hikariConfig.setConnectionTimeout(3000L);
             hikariConfig.setIdleTimeout(hikariConfig.getMinimumIdle() < hikariConfig.getMaximumPoolSize() ? 60000L : 0L);
             hikariConfig.addDataSourceProperty("cachePrepStmts", true);
+            hikariConfig.addDataSourceProperty("autoReconnect", true);
             hikariConfig.addDataSourceProperty("prepStmtCacheSize", 250);
             hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", 2048);
             dataSource = new HikariDataSource(hikariConfig);
