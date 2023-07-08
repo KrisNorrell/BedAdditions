@@ -4,20 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e48119df-5f27-4ebd-ad7f-16c233dfdd51" name="Default Changelist" comment="Updated Plugin">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/checksums/sha1-checksums.bin" afterDir="false" />
+    <list default="true" id="e48119df-5f27-4ebd-ad7f-16c233dfdd51" name="Default Changelist" comment="Different menu types">
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/bedpotato/bedadditions/utilities/menusystem/EditableMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/bedpotato/bedadditions/utilities/PlayerMenuUtility.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/bedpotato/bedadditions/utilities/SQLUtil/MySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/bedpotato/bedadditions/utilities/SQLUtil/MySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/bedpotato/bedadditions/events/MenuListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/bedpotato/bedadditions/events/MenuListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/bedpotato/bedadditions/utilities/menusystem/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/bedpotato/bedadditions/utilities/menusystem/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +132,7 @@
       <recent name="me.bedpotato.bedadditions.utilities.SQLUtil" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.BedAdditions2.0 [build]">
+  <component name="RunManager" selected="Gradle.BedAdditions2.0 [shadowJar]">
     <configuration name="BedAdditions2.0 [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -343,8 +340,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.BedAdditions2.0 [build]" />
         <item itemvalue="Gradle.BedAdditions2.0 [shadowJar]" />
+        <item itemvalue="Gradle.BedAdditions2.0 [build]" />
         <item itemvalue="Gradle.BedAdditions2.0 [publish]" />
         <item itemvalue="Gradle.BedAdditions2.0 [publishToMavenLocal]" />
         <item itemvalue="Gradle.BedAdditions2.0 [clean]" />
@@ -545,7 +542,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687645216761</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Different menu types">
+      <created>1688837855735</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1688837855735</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -594,7 +598,8 @@
     <MESSAGE value="java 17" />
     <MESSAGE value="update a few things" />
     <MESSAGE value="Updated Plugin" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Plugin" />
+    <MESSAGE value="Different menu types" />
+    <option name="LAST_COMMIT_MESSAGE" value="Different menu types" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
