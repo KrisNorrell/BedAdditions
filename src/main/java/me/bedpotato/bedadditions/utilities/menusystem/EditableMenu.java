@@ -2,7 +2,7 @@ package me.bedpotato.bedadditions.utilities.menusystem;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -13,7 +13,7 @@ import java.util.Arrays;
 /*
     Defines the behavior and attributes of all menus in our plugin
  */
-public abstract class Menu implements InventoryHolder {
+public abstract class EditableMenu implements InventoryHolder {
 
     //Protected values that can be accessed in the menus
     protected PlayerMenuUtility playerMenuUtility;
@@ -23,7 +23,7 @@ public abstract class Menu implements InventoryHolder {
     //Constructor for Menu. Pass in a PlayerMenuUtility so that
     // we have information on who's menu this is and
     // what info is to be transfered
-    public Menu(PlayerMenuUtility playerMenuUtility) {
+    public EditableMenu(PlayerMenuUtility playerMenuUtility) {
         this.playerMenuUtility = playerMenuUtility;
     }
 
@@ -34,7 +34,7 @@ public abstract class Menu implements InventoryHolder {
     public abstract int getSlots();
 
     //let each menu decide how the items in the menu will be handled when clicked
-    public abstract void handleMenu(InventoryClickEvent e);
+    public abstract void handleMenu(InventoryCloseEvent e);
 
     //let each menu decide what items are to be placed in the inventory menu
     public abstract void setMenuItems();

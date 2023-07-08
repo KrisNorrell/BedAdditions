@@ -1,6 +1,7 @@
 package me.bedpotato.bedadditions.events;
 
 import me.bedpotato.bedadditions.BedAdditions;
+import me.bedpotato.bedadditions.utilities.menusystem.EditableMenu;
 import me.bedpotato.bedadditions.utilities.menusystem.Menu;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,12 +28,11 @@ public class MenuListener implements Listener {
         }
 
     }
-
     @EventHandler
     public void onMenuClick(InventoryCloseEvent e) {
 
         InventoryHolder holder = e.getInventory().getHolder();
-        if (holder instanceof Menu menu) {
+        if (holder instanceof EditableMenu menu) {
             menu.handleMenu(e);
         }
 
