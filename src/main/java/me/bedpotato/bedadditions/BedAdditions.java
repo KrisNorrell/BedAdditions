@@ -7,6 +7,7 @@ import me.bedpotato.bedadditions.manager.addons.AddonLoader;
 import me.bedpotato.bedadditions.utilities.ConfigHandler;
 import me.bedpotato.bedadditions.utilities.SQLUtil.MySQL;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -63,9 +64,16 @@ public final class BedAdditions extends JavaPlugin {
         );
         try {
             sql.connect();
+            getLogger().info("Connected to SQL database.");
         } catch (SQLException e) {
+            getLogger().severe("Failed to connect to SQL database: " + e.getMessage());
             e.printStackTrace();
+            // Set isSqlReady to false or handle the error appropriately
         }
+    }
+
+    public boolean isNullOrEmpty(ConfigurationSection section) {
+        return section == null || section.getKeys(false).isEmpty();
     }
 
     public void startup() {
@@ -80,21 +88,29 @@ public final class BedAdditions extends JavaPlugin {
         }
         HandlerList.unregisterAll(this);
         manager = new CommandManager();
-        connectToSQL();
+
+        if (!isNullOrEmpty(config.getConfigurationSection("storage"))) {
+            // Check if the SQL configuration is present and valid
+            connectToSQL(); // Only attempt to connect if SQL configuration is available
+        } else {
+            getLogger().warning("SQL configuration is missing or invalid. Database connection will not be established.");
+        }
+
         manager.setup();
         new MenuListener(this);
         new AddonLoader(this);
     }
 
+
     public void shutdown() {
         AddonLoader.getAddons().forEach(Addon::onShutdown);
         AddonLoader.getAddons().clear();
         HandlerList.unregisterAll(this);
-        try {
-            sql.disconnect();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            sql.disconnect();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
 }

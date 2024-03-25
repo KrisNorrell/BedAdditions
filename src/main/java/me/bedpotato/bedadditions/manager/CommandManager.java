@@ -5,10 +5,9 @@ import me.bedpotato.bedadditions.commands.reloadCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class CommandManager implements CommandExecutor, TabCompleter {
 
@@ -95,17 +94,41 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         return null;
     }
 
+    private final Map<CommandSender, List<String>> completedArguments = new HashMap<>();
+
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+        List<String> completions = new ArrayList<>();
+        // Check if the sender is a player
         if (sender instanceof Player) {
             List<String> all = cmdList(sender);
-            if (args.length >= 1 && all.size() > args.length)
-            {
-                int index = args.length-1;
-                return all.stream().filter(s -> args[index].isEmpty() || s.startsWith(args[index].toLowerCase())).sorted().toList();
+
+            // Check if the sender has completed arguments for this sub-command
+            List<String> completedArgs = completedArguments.getOrDefault(sender, new ArrayList<>());
+            String currentArg = args[args.length - 1].toLowerCase();
+
+            // If the current argument has been completed, return an empty list
+            if (completedArgs.contains(currentArg)) {
+                return completions;
+            }
+
+            if (args.length == 1) {
+                // Filter and copy partial matches to completions list for the main command
+                StringUtil.copyPartialMatches(args[args.length - 1], all, completions);
+            } else {
+                String subCommand = args[0].toLowerCase();
+                SubCommand sc = get(sender, subCommand);
+
+                if (sc instanceof TabCompleteHandler) {
+                    // Invoke tab completion logic for the sub-command
+                    completions = ((TabCompleteHandler) sc).onTabComplete(sender, args);
+                    completedArgs.add(currentArg); // Mark the current argument as completed
+                    completedArguments.put(sender, completedArgs);
+                }
             }
         }
-        return null;
+
+        return completions;
     }
 
     public List<String> cmdList(CommandSender player) {
@@ -117,5 +140,9 @@ public class CommandManager implements CommandExecutor, TabCompleter {
             }
         }
         return list;
+    }
+
+    public void setTabComplete(int position, List<String> list) {
+
     }
 }

@@ -34,11 +34,9 @@ public class MySQL {
             hikariConfig.setJdbcUrl(url);
             hikariConfig.setUsername(username);
             hikariConfig.setPassword(password);
-            hikariConfig.setMaximumPoolSize(10);
-            hikariConfig.setMinimumIdle(10);
-            hikariConfig.setMaxLifetime(180000);
-            hikariConfig.setConnectionTimeout(3000L);
-            hikariConfig.setIdleTimeout(hikariConfig.getMinimumIdle() < hikariConfig.getMaximumPoolSize() ? 60000L : 0L);
+            hikariConfig.setMaximumPoolSize(20); // Adjust as needed
+            hikariConfig.setMaxLifetime(180000); // Adjust as needed
+            hikariConfig.setConnectionTimeout(3000L); // Adjust as needed
             hikariConfig.addDataSourceProperty("cachePrepStmts", true);
             hikariConfig.addDataSourceProperty("autoReconnect", true);
             hikariConfig.addDataSourceProperty("prepStmtCacheSize", 250);
