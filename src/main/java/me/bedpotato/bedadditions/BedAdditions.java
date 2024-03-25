@@ -29,7 +29,6 @@ public final class BedAdditions extends JavaPlugin {
     }
 
     private static MySQL sql;
-    private boolean isSqlReady = true;
     public CommandManager manager;
 
     public MySQL getSql() {
@@ -65,8 +64,11 @@ public final class BedAdditions extends JavaPlugin {
         );
         try {
             sql.connect();
+            getLogger().info("Connected to SQL database.");
         } catch (SQLException e) {
+            getLogger().severe("Failed to connect to SQL database: " + e.getMessage());
             e.printStackTrace();
+            // Set isSqlReady to false or handle the error appropriately
         }
     }
 
@@ -87,26 +89,11 @@ public final class BedAdditions extends JavaPlugin {
         HandlerList.unregisterAll(this);
         manager = new CommandManager();
 
-        if (isNullOrEmpty(config.getConfigurationSection("storage"))) {
-            isSqlReady = false;
-            getLogger().warning("Looks like SQL isn't setup, ignoring error...");
-        }
-
-        // Check if the connection to SQL is already established
-        if (isSqlReady) {
-            if (sql.connection == null) {
-                connectToSQL();
-            } else {
-                // Check if the connection is closed, and reconnect if necessary
-                try {
-                    if (sql.connection.isClosed()) {
-                        connectToSQL();
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    // Handle the error appropriately
-                }
-            }
+        if (!isNullOrEmpty(config.getConfigurationSection("storage"))) {
+            // Check if the SQL configuration is present and valid
+            connectToSQL(); // Only attempt to connect if SQL configuration is available
+        } else {
+            getLogger().warning("SQL configuration is missing or invalid. Database connection will not be established.");
         }
 
         manager.setup();
