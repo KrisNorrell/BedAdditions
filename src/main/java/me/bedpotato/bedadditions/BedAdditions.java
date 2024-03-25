@@ -7,6 +7,7 @@ import me.bedpotato.bedadditions.manager.addons.AddonLoader;
 import me.bedpotato.bedadditions.utilities.ConfigHandler;
 import me.bedpotato.bedadditions.utilities.SQLUtil.MySQL;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -28,6 +29,7 @@ public final class BedAdditions extends JavaPlugin {
     }
 
     private static MySQL sql;
+    private boolean isSqlReady = true;
     public CommandManager manager;
 
     public MySQL getSql() {
@@ -68,6 +70,10 @@ public final class BedAdditions extends JavaPlugin {
         }
     }
 
+    public boolean isNullOrEmpty(ConfigurationSection section) {
+        return section == null || section.getKeys(false).isEmpty();
+    }
+
     public void startup() {
         configFile = new File(getDataFolder(), "config.yml");
         if (!configFile.exists()) {
@@ -80,21 +86,44 @@ public final class BedAdditions extends JavaPlugin {
         }
         HandlerList.unregisterAll(this);
         manager = new CommandManager();
-        connectToSQL();
+
+        if (isNullOrEmpty(config.getConfigurationSection("storage"))) {
+            isSqlReady = false;
+            getLogger().warning("Looks like SQL isn't setup, ignoring error...");
+        }
+
+        // Check if the connection to SQL is already established
+        if (isSqlReady) {
+            if (sql.connection == null) {
+                connectToSQL();
+            } else {
+                // Check if the connection is closed, and reconnect if necessary
+                try {
+                    if (sql.connection.isClosed()) {
+                        connectToSQL();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    // Handle the error appropriately
+                }
+            }
+        }
+
         manager.setup();
         new MenuListener(this);
         new AddonLoader(this);
     }
 
+
     public void shutdown() {
         AddonLoader.getAddons().forEach(Addon::onShutdown);
         AddonLoader.getAddons().clear();
         HandlerList.unregisterAll(this);
-        try {
-            sql.disconnect();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            sql.disconnect();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
 }
